@@ -18,17 +18,17 @@ import photo11 from '../assets/photos/photo 11.jpg'
 
 // Ken Burns zoom directions — alternates per slide for variety
 const SLIDES = [
-  { photo: photo1,  caption: 'Every picture holds a thousand feelings.',      sub: 'Chapter I',   zoom: 'in',    origin: 'center' },
-  { photo: photo2,  caption: 'The moments we didn\'t plan are the best ones.', sub: 'Chapter II',  zoom: 'out',   origin: '30% 70%' },
-  { photo: photo3,  caption: 'Time flies — but memories stay forever.',        sub: 'Chapter III', zoom: 'in',    origin: '70% 30%' },
-  { photo: photo4,  caption: 'Happiness looks good on you.',                   sub: 'Chapter IV',  zoom: 'out',   origin: 'center' },
-  { photo: photo5,  caption: 'Some smiles are just contagious.',               sub: 'Chapter V',   zoom: 'in',    origin: '50% 80%' },
-  { photo: photo6,  caption: 'These are the days we\'ll talk about.',          sub: 'Chapter VI',  zoom: 'out',   origin: '20% 50%' },
-  { photo: photo7,  caption: 'Another angle, same wonderful person.',          sub: 'Chapter VII', zoom: 'in',    origin: '80% 20%' },
-  { photo: photo8,  caption: 'Proof that good times were had.',                sub: 'Chapter VIII',zoom: 'out',   origin: 'center' },
-  { photo: photo9,  caption: 'A frame worth keeping.',                         sub: 'Chapter IX',  zoom: 'in',    origin: '40% 60%' },
-  { photo: photo10, caption: 'Still here, still shining.',                     sub: 'Chapter X',   zoom: 'out',   origin: '60% 40%' },
-  { photo: photo11, caption: 'The last frame — but never the last memory.',    sub: 'Chapter XI',  zoom: 'in',    origin: 'center' },
+  { photo: photo1,  caption: 'The person I was watching from across campus. Worth it.',         sub: 'Chapter I',    zoom: 'in',  origin: 'center' },
+  { photo: photo2,  caption: 'Still waiting on that hug from day one, by the way.',             sub: 'Chapter II',   zoom: 'out', origin: '30% 70%' },
+  { photo: photo3,  caption: 'Unbothered. Hilarious. Impossible to be bored around.',           sub: 'Chapter III',  zoom: 'in',  origin: '70% 30%' },
+  { photo: photo4,  caption: 'She finds the funny in everything. Everything.',                  sub: 'Chapter IV',   zoom: 'out', origin: 'center' },
+  { photo: photo5,  caption: 'Keeps it simple. Keeps it real. No drama, just good vibes.',     sub: 'Chapter V',    zoom: 'in',  origin: '50% 80%' },
+  { photo: photo6,  caption: 'The one who forwards you a meme at 7am and it\'s always funny.',  sub: 'Chapter VI',   zoom: 'out', origin: '20% 50%' },
+  { photo: photo7,  caption: 'Happy looks good on you. It always has.',                         sub: 'Chapter VII',  zoom: 'in',  origin: '80% 20%' },
+  { photo: photo8,  caption: 'One Tuesday text changed everything. Glad I sent it.',            sub: 'Chapter VIII', zoom: 'out', origin: 'center' },
+  { photo: photo9,  caption: 'She actually listens to every voice note. Every single one.',    sub: 'Chapter IX',   zoom: 'in',  origin: '40% 60%' },
+  { photo: photo10, caption: 'The kind of friend you didn\'t know you needed until she showed up.', sub: 'Chapter X', zoom: 'out', origin: '60% 40%' },
+  { photo: photo11, caption: 'Twenty years in the making. Lucky to know you in this one.',     sub: 'Chapter XI',   zoom: 'in',  origin: 'center' },
 ]
 
 const DURATION = 6000 // ms per slide

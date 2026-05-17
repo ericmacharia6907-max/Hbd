@@ -6,23 +6,23 @@ import PremiumButton from '../components/PremiumButton'
 const moments = [
   {
     number: '001',
-    title:  'First Contact',
-    body:   'The first unforgettable conversation — the kind where time forgets to move forward.',
+    title:  'The Quiet Observation',
+    body:   'We joined campus and I already knew I wanted a real friend. I just didn\'t know it would be you. So I did what made sense at the time — I watched. Every move. You already know this. And you still became my friend anyway. That says everything about you.',
   },
   {
     number: '002',
-    title:  'Something Clicked',
-    body:   'The moment laughter became effortless and silence stopped feeling awkward.',
+    title:  'That Tuesday',
+    body:   'One random Tuesday I decided to stop watching and just text. No grand plan, no perfect opening line. Just a text. And that was it — that was the beginning of everything. Funny how the best things start on the most ordinary days.',
   },
   {
     number: '003',
-    title:  'The In-Between',
-    body:   'The random Tuesday moments. The inside jokes no one else would understand.',
+    title:  'The First Meet & The Missing Hug',
+    body:   'You said I was nervous. You were right. We finally met in person and I completely forgot to hug you. A whole hug — gone. Missed. You have never let me forget it and honestly, fair enough. But that awkward moment is one of my favourite memories.',
   },
   {
     number: '004',
-    title:  'Chapter Still Open',
-    body:   'The story isn\'t finished. The best pages haven\'t been written yet.',
+    title:  'What I Know About You Now',
+    body:   'You are genuinely the funniest person in any room and you don\'t even try. You like things simple, working, and drama-free. You share every meme, every video, every little happy thing you find — because that\'s just who you are. And my voice notes? You actually listen. That\'s rare. You\'re rare.',
   },
 ]
 

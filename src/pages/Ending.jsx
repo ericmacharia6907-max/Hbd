@@ -90,9 +90,10 @@ export default function Ending() {
             fontWeight: 300,
           }}
         >
-          For the memories that never leave.<br />
-          For the laughter that still echoes.<br />
-          For simply being Edignar — in this chapter<br />
+          For the Tuesday I finally stopped watching and just texted.<br />
+          For the hug I still owe you from day one.<br />
+          For every meme, every voice note, every laugh —<br />
+          for simply being Edignar, in this chapter<br />
           we're lucky enough to share.
         </motion.p>
 
