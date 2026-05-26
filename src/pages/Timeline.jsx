@@ -16,13 +16,13 @@ const moments = [
   },
   {
     number: '003',
-    title:  'The First Meet & The Missing Hug',
-    body:   'You said I was nervous. You were right. We finally met in person and I completely forgot to hug you. A whole hug — gone. Missed. You have never let me forget it and honestly, fair enough. But that awkward moment is one of my favourite memories.',
+    title:  'The Pact',
+    body:   'No lies. Ever. That was the agreement and we\'ve kept it. There\'s something rare about a friendship where honesty isn\'t even a question — it\'s just the foundation. That\'s what we built this on.',
   },
   {
     number: '004',
-    title:  'What I Know About You Now',
-    body:   'You are genuinely the funniest person in any room and you don\'t even try. You like things simple, working, and drama-free. You share every meme, every video, every little happy thing you find — because that\'s just who you are. And the stories in those voice notes? You actually listen. That\'s rare. You\'re rare.',
+    title:  'The Future We Keep Talking About',
+    body:   'The business. The bucket list. The daily AI streak you keep forgetting and I keep reminding you about. We don\'t just talk about the future — we actually plan for it. Turning 20 is just the beginning of everything we\'ve already mapped out.',
   },
 ]
 

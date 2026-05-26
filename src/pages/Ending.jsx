@@ -91,8 +91,9 @@ export default function Ending() {
           }}
         >
           For the Tuesday I finally stopped watching and just texted.<br />
-          For the hug I still owe you from day one.<br />
-          For every meme, every voice note, every laugh —<br />
+          For the no-lies pact we've never broken.<br />
+          For every future we've planned, every streak reminder,<br />
+          every meme, every check-in, every big dream —<br />
           for simply being Edignar, in this chapter<br />
           we're lucky enough to share.
         </motion.p>
@@ -134,7 +135,7 @@ export default function Ending() {
             textTransform: 'uppercase',
           }}
         >
-          P.S. — I still owe you that hug.
+          P.S. — Don't forget your streak today.
         </motion.p>
       </div>
 

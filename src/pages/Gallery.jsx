@@ -19,7 +19,7 @@ import photo11 from '../assets/photos/photo 11.jpg'
 // Ken Burns zoom directions — alternates per slide for variety
 const SLIDES = [
   { photo: photo1,  caption: 'The person I was watching from across campus. Worth it.',         sub: 'Chapter I',    zoom: 'in',  origin: 'center' },
-  { photo: photo2,  caption: 'Still waiting on that hug from day one, by the way.',             sub: 'Chapter II',   zoom: 'out', origin: '30% 70%' },
+  { photo: photo2,  caption: 'No lies, no filter. Just real friendship from day one.',             sub: 'Chapter II',   zoom: 'out', origin: '30% 70%' },
   { photo: photo3,  caption: 'Unbothered. Hilarious. Impossible to be bored around.',           sub: 'Chapter III',  zoom: 'in',  origin: '70% 30%' },
   { photo: photo4,  caption: 'She finds the funny in everything. Everything.',                  sub: 'Chapter IV',   zoom: 'out', origin: 'center' },
   { photo: photo5,  caption: 'Keeps it simple. Keeps it real. No drama, just good vibes.',     sub: 'Chapter V',    zoom: 'in',  origin: '50% 80%' },

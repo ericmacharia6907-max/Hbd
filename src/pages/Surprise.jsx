@@ -241,7 +241,7 @@ export default function Surprise() {
               }}
             >
               Not just today. Not just because it's your birthday.<br />
-              But every meme you've sent, every moment you made simple,<br />
+              But every daily check-in, every big dream we've mapped out,<br />
               every story you sat through in those voice notes —<br />
               <span style={{ color: 'rgba(201,168,76,0.8)' }}>
                 you're the friend I was looking for all along.
