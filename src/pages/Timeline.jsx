@@ -22,7 +22,7 @@ const moments = [
   {
     number: '004',
     title:  'What I Know About You Now',
-    body:   'You are genuinely the funniest person in any room and you don\'t even try. You like things simple, working, and drama-free. You share every meme, every video, every little happy thing you find — because that\'s just who you are. And my voice notes? You actually listen. That\'s rare. You\'re rare.',
+    body:   'You are genuinely the funniest person in any room and you don\'t even try. You like things simple, working, and drama-free. You share every meme, every video, every little happy thing you find — because that\'s just who you are. And the stories in those voice notes? You actually listen. That\'s rare. You\'re rare.',
   },
 ]
 

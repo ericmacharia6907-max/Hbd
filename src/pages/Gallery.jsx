@@ -26,7 +26,7 @@ const SLIDES = [
   { photo: photo6,  caption: 'The one who forwards you a meme at 7am and it\'s always funny.',  sub: 'Chapter VI',   zoom: 'out', origin: '20% 50%' },
   { photo: photo7,  caption: 'Happy looks good on you. It always has.',                         sub: 'Chapter VII',  zoom: 'in',  origin: '80% 20%' },
   { photo: photo8,  caption: 'One Tuesday text changed everything. Glad I sent it.',            sub: 'Chapter VIII', zoom: 'out', origin: 'center' },
-  { photo: photo9,  caption: 'She actually listens to every voice note. Every single one.',    sub: 'Chapter IX',   zoom: 'in',  origin: '40% 60%' },
+  { photo: photo9,  caption: 'She actually listens to every story, every voice note. Every one.',    sub: 'Chapter IX',   zoom: 'in',  origin: '40% 60%' },
   { photo: photo10, caption: 'The kind of friend you didn\'t know you needed until she showed up.', sub: 'Chapter X', zoom: 'out', origin: '60% 40%' },
   { photo: photo11, caption: 'Twenty years in the making. Lucky to know you in this one.',     sub: 'Chapter XI',   zoom: 'in',  origin: 'center' },
 ]

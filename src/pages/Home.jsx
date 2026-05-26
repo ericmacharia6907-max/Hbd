@@ -106,12 +106,64 @@ export default function Home() {
             fontFamily: 'var(--font-display)', fontStyle: 'italic',
             fontSize: 'clamp(1.05rem, 2.2vw, 1.5rem)',
             color: 'rgba(245,242,236,0.42)',
-            maxWidth: 500, lineHeight: 1.75, marginBottom: '4rem', fontWeight: 300,
+            maxWidth: 500, lineHeight: 1.75, marginBottom: '2.5rem', fontWeight: 300,
           }}
         >
           Two decades of being exactly<br />
           who you were meant to be.
         </motion.p>
+
+        {/* Personal note */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 2.4 }}
+          style={{
+            maxWidth: 480,
+            padding: '1.6rem 2rem',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: 2,
+            marginBottom: '3rem',
+            textAlign: 'left',
+            position: 'relative',
+          }}
+        >
+          {/* Quote mark */}
+          <span style={{
+            position: 'absolute', top: '-0.8rem', left: '1.5rem',
+            fontFamily: 'var(--font-display)',
+            fontSize: '3rem', lineHeight: 1,
+            color: 'var(--gold)', opacity: 0.4,
+          }}>
+            "
+          </span>
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
+            color: 'rgba(245,242,236,0.6)',
+            lineHeight: 1.9,
+            fontWeight: 300,
+          }}>
+            I made this for you. Hope it makes you smile —
+            the way you always make everyone around you smile
+            without even trying. For every meme you've sent at
+            odd hours, every happy thing you've discovered and
+            just had to share, every tough moment we've sat through
+            together. This is for all of it. All of you.
+          </p>
+          <p style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.58rem',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--gold)',
+            opacity: 0.6,
+            marginTop: '1rem',
+          }}>
+            — Your friend who still owes you a hug
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

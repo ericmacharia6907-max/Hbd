@@ -119,6 +119,23 @@ export default function Ending() {
           <div className='line-gold' style={{ width: 60 }} />
           <PremiumButton text='↺  Replay Experience' onClick={() => navigate('/')} />
         </motion.div>
+
+        {/* Punchline */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 4.2 }}
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.6rem',
+            letterSpacing: '0.18em',
+            color: 'rgba(201,168,76,0.35)',
+            marginTop: '2rem',
+            textTransform: 'uppercase',
+          }}
+        >
+          P.S. — I still owe you that hug.
+        </motion.p>
       </div>
 
       {/* Bottom corner accents */}
