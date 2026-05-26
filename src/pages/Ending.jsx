@@ -94,8 +94,7 @@ export default function Ending() {
           For the no-lies pact we've never broken.<br />
           For every future we've planned, every streak reminder,<br />
           every meme, every check-in, every big dream —<br />
-          for simply being Edignar, in this chapter<br />
-          we're lucky enough to share.
+          I'm really glad it was you.
         </motion.p>
 
         {/* Signature */}

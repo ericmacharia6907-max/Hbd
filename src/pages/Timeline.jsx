@@ -12,7 +12,7 @@ const moments = [
   {
     number: '002',
     title:  'That Tuesday',
-    body:   'One random Tuesday I decided to stop watching and just text. No grand plan, no perfect opening line. Just a text. And that was it — that was the beginning of everything. Funny how the best things start on the most ordinary days.',
+    body:   'One random Tuesday I decided to just text. And that was it — that was the beginning of everything. Funny how the best things start on the most ordinary days.',
   },
   {
     number: '003',
@@ -22,7 +22,7 @@ const moments = [
   {
     number: '004',
     title:  'The Future We Keep Talking About',
-    body:   'The business. The bucket list. The daily AI streak you keep forgetting and I keep reminding you about. We don\'t just talk about the future — we actually plan for it. Turning 20 is just the beginning of everything we\'ve already mapped out.',
+    body:   'The business. The bucket list. The daily AI streak I keep reminding you about. We don\'t just talk about the future — we actually plan for it. Turning 20 is just the beginning of everything we\'ve already mapped out.',
   },
 ]
 

@@ -147,8 +147,8 @@ export default function Home() {
           }}>
             I made this for you. Hope it makes you smile —
             the way you always make everyone around you smile
-            without even trying. For every meme sent at odd hours,
-            every happy thing discovered and just had to share,
+            without even trying. For every meme sent, every
+            happy thing discovered and just had to share,
             every big dream we've talked about, every business idea,
             every daily check-in. This is for all of it. All of you.
           </p>
