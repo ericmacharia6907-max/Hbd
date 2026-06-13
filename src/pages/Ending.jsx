@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import PremiumButton from '../components/PremiumButton'
 
@@ -13,8 +13,45 @@ const words = [
   }},
 ]
 
+const HIDDEN_MESSAGE = `Okay, real talk — I spent way too many nights on this instead of sleeping. Worth it though.
+
+Also... thank you for actually listening when I randomly bring up business ideas and future plans out of nowhere. Not everyone would sit through that. You always do.
+
+You're stuck with me forever now. That's not a threat, that's a promise. 🤝
+
+Happy 20th, Edignar.`
+
 export default function Ending() {
   const navigate = useNavigate()
+  const [holding, setHolding]   = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [revealed, setRevealed] = useState(false)
+  const timerRef = useRef(null)
+  const startRef = useRef(null)
+
+  const startHold = () => {
+    if (revealed) return
+    setHolding(true)
+    startRef.current = Date.now()
+    timerRef.current = setInterval(() => {
+      const elapsed = Date.now() - startRef.current
+      const pct = Math.min(elapsed / 2000, 1) // 2 seconds
+      setProgress(pct)
+      if (pct >= 1) {
+        clearInterval(timerRef.current)
+        setRevealed(true)
+        setHolding(false)
+      }
+    }, 16)
+  }
+
+  const cancelHold = () => {
+    if (revealed) return
+    clearInterval(timerRef.current)
+    setHolding(false)
+    setProgress(0)
+  }
+
   return (
     <section style={{
       position: 'relative',
@@ -90,7 +127,7 @@ export default function Ending() {
             fontWeight: 300,
           }}
         >
-          For the Tuesday I finally stopped watching and just texted.<br />
+          For the day I finally stopped watching and just texted.<br />
           For the no-lies pact we've never broken.<br />
           For every future we've planned, every streak reminder,<br />
           every meme, every check-in, every big dream —<br />
@@ -136,6 +173,89 @@ export default function Ending() {
         >
           P.S. — Don't forget your streak today.
         </motion.p>
+
+        {/* ── Hidden message — hold to reveal ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 5 }}
+          style={{ marginTop: '4rem' }}
+        >
+          <AnimatePresence mode='wait'>
+            {!revealed ? (
+              <motion.div
+                key='prompt'
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
+              >
+                <button
+                  onMouseDown={startHold}
+                  onMouseUp={cancelHold}
+                  onMouseLeave={cancelHold}
+                  onTouchStart={startHold}
+                  onTouchEnd={cancelHold}
+                  data-cursor
+                  style={{
+                    position: 'relative',
+                    background: 'none',
+                    border: '1px solid rgba(201,168,76,0.2)',
+                    borderRadius: 999,
+                    padding: '14px 36px',
+                    cursor: 'none',
+                    overflow: 'hidden',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.25em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(245,242,236,0.4)',
+                  }}
+                >
+                  {/* Fill progress */}
+                  <span style={{
+                    position: 'absolute', inset: 0,
+                    background: 'rgba(201,168,76,0.15)',
+                    transform: `scaleX(${progress})`,
+                    transformOrigin: 'left',
+                    transition: holding ? 'none' : 'transform 0.3s ease',
+                  }} />
+                  <span style={{ position: 'relative' }}>
+                    {holding ? 'Hold...' : 'Hold to reveal something'}
+                  </span>
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key='message'
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+                style={{
+                  maxWidth: 540,
+                  margin: '0 auto',
+                  padding: '2rem 2.2rem',
+                  border: '1px solid rgba(201,168,76,0.2)',
+                  borderRadius: 4,
+                  background: 'rgba(201,168,76,0.03)',
+                  textAlign: 'left',
+                }}
+              >
+                <p className='label' style={{ marginBottom: '1.2rem', textAlign: 'center' }}>
+                  ✦ One More Thing ✦
+                </p>
+                <p style={{
+                  fontFamily: 'var(--font-display)',
+                  fontStyle: 'italic',
+                  fontSize: 'clamp(0.95rem, 2vw, 1.15rem)',
+                  color: 'rgba(245,242,236,0.65)',
+                  lineHeight: 1.9,
+                  whiteSpace: 'pre-line',
+                }}>
+                  {HIDDEN_MESSAGE}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Bottom corner accents */}

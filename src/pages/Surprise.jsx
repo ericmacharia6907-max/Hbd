@@ -244,7 +244,7 @@ export default function Surprise() {
               But every daily check-in, every big dream we've mapped out,<br />
               every story, every plan, every reminder I send you —<br />
               <span style={{ color: 'rgba(201,168,76,0.8)' }}>
-                I'm really glad I sent that text on a Tuesday.
+                I'm really glad we're friends.
               </span>
             </motion.p>
 
@@ -254,7 +254,7 @@ export default function Surprise() {
               transition={{ duration: 0.8, delay: 0.9 }}
             >
               <button
-                onClick={() => navigate('/ending')}
+                onClick={() => navigate('/wish')}
                 data-cursor
                 style={{
                   background: 'none', border: '1px solid var(--gold)',

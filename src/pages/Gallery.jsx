@@ -16,45 +16,45 @@ import photo9  from '../assets/photos/photo 9.jpg'
 import photo10 from '../assets/photos/photo 10.jpg'
 import photo11 from '../assets/photos/photo 11.jpg'
 
-// Ken Burns zoom directions — alternates per slide for variety
 const SLIDES = [
-  { photo: photo1,  caption: 'The person I was watching from across campus. Worth it.',         sub: 'Chapter I',    zoom: 'in',  origin: 'center' },
-  { photo: photo2,  caption: 'No lies, no filter. Just real friendship from day one.',             sub: 'Chapter II',   zoom: 'out', origin: '30% 70%' },
-  { photo: photo3,  caption: 'Unbothered. Hilarious. Impossible to be bored around.',           sub: 'Chapter III',  zoom: 'in',  origin: '70% 30%' },
-  { photo: photo4,  caption: 'She finds the funny in everything. Everything.',                  sub: 'Chapter IV',   zoom: 'out', origin: 'center' },
-  { photo: photo5,  caption: 'Keeps it simple. Keeps it real. No drama, just good vibes.',     sub: 'Chapter V',    zoom: 'in',  origin: '50% 80%' },
-  { photo: photo6,  caption: 'The one who forwards you a meme at 7am and it\'s always funny.',  sub: 'Chapter VI',   zoom: 'out', origin: '20% 50%' },
-  { photo: photo7,  caption: 'Happy looks good on you. It always has.',                         sub: 'Chapter VII',  zoom: 'in',  origin: '80% 20%' },
-  { photo: photo8,  caption: 'One Tuesday text changed everything. Glad I sent it.',            sub: 'Chapter VIII', zoom: 'out', origin: 'center' },
-  { photo: photo9,  caption: 'She actually listens to every story, every voice note. Every one.',    sub: 'Chapter IX',   zoom: 'in',  origin: '40% 60%' },
-  { photo: photo10, caption: 'The kind of friend you didn\'t know you needed until she showed up.', sub: 'Chapter X', zoom: 'out', origin: '60% 40%' },
-  { photo: photo11, caption: 'Twenty years in the making. Lucky to know you in this one.',     sub: 'Chapter XI',   zoom: 'in',  origin: 'center' },
+  { photo: photo1,  caption: 'The person I was watching from across campus. Worth it.',         sub: 'Chapter I',    origin: 'center' },
+  { photo: photo2,  caption: 'No lies, no filter. Just real friendship from day one.',           sub: 'Chapter II',   origin: '30% 70%' },
+  { photo: photo3,  caption: 'Unbothered. Hilarious. Impossible to be bored around.',           sub: 'Chapter III',  origin: '70% 30%' },
+  { photo: photo4,  caption: 'She finds the funny in everything. Everything.',                  sub: 'Chapter IV',   origin: 'center' },
+  { photo: photo5,  caption: 'Keeps it simple. Keeps it real. No drama, just good vibes.',     sub: 'Chapter V',    origin: '50% 80%' },
+  { photo: photo6,  caption: 'The one who forwards you a meme at 7am and it\'s always funny.',  sub: 'Chapter VI',   origin: '20% 50%' },
+  { photo: photo7,  caption: 'Happy looks good on you. It always has.',                         sub: 'Chapter VII',  origin: '80% 20%' },
+  { photo: photo8,  caption: 'One Tuesday text changed everything. Glad I sent it.',            sub: 'Chapter VIII', origin: 'center' },
+  { photo: photo9,  caption: 'She actually listens to every story, every voice note. Every one.', sub: 'Chapter IX', origin: '40% 60%' },
+  { photo: photo10, caption: 'The kind of friend you didn\'t know you needed until she showed up.', sub: 'Chapter X', origin: '60% 40%' },
+  { photo: photo11, caption: 'Twenty years in the making. Lucky to know you in this one.',     sub: 'Chapter XI',   origin: 'center' },
 ]
 
-const DURATION = 6000 // ms per slide
+const DURATION = 6000
 
 export default function Gallery() {
   const navigate = useNavigate()
   const [current, setCurrent] = useState(0)
-  const [prev,    setPrev]    = useState(null)
-  const [dir,     setDir]     = useState(1)
   const [paused,  setPaused]  = useState(false)
+  const [animating, setAnimating] = useState(false)
 
-  const goTo = useCallback((idx, direction) => {
-    setPrev(current)
-    setDir(direction)
-    setCurrent(idx)
-  }, [current])
+  const goTo = useCallback((idx) => {
+    if (animating) return
+    setAnimating(true)
+    setTimeout(() => {
+      setCurrent(idx)
+      setTimeout(() => setAnimating(false), 50)
+    }, 600) // curtains close before swapping image
+  }, [animating])
 
-  // Auto-advance
   useEffect(() => {
     if (paused) return
-    const t = setTimeout(() => goTo((current + 1) % SLIDES.length, 1), DURATION)
+    const t = setTimeout(() => goTo((current + 1) % SLIDES.length), DURATION)
     return () => clearTimeout(t)
   }, [current, paused, goTo])
 
-  const prev_slide = () => goTo((current - 1 + SLIDES.length) % SLIDES.length, -1)
-  const next_slide = () => goTo((current + 1) % SLIDES.length,  1)
+  const prev_slide = () => goTo((current - 1 + SLIDES.length) % SLIDES.length)
+  const next_slide = () => goTo((current + 1) % SLIDES.length)
 
   const slide = SLIDES[current]
 
@@ -64,49 +64,66 @@ export default function Gallery() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Ken Burns background layer ── */}
-      <AnimatePresence>
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.4, ease: 'easeInOut' }}
-          style={{ position: 'absolute', inset: 0, zIndex: 0 }}
-        >
-          {/* Ken Burns zoom via CSS animation on the img */}
-          <img
-            src={slide.photo}
-            alt=''
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover',
-              objectPosition: slide.origin,
-              animation: slide.zoom === 'in'
-                ? 'kenBurnsIn 7s ease forwards'
-                : 'kenBurnsOut 7s ease forwards',
-            }}
-          />
+      {/* ── Base image (always current) ── */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <img
+          src={slide.photo}
+          alt=''
+          style={{
+            width: '100%', height: '100%',
+            objectFit: 'cover',
+            objectPosition: slide.origin,
+          }}
+        />
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `
+            linear-gradient(to top,    rgba(0,0,0,0.85) 0%,   rgba(0,0,0,0.1) 40%),
+            linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,    transparent 25%),
+            linear-gradient(to right,  rgba(0,0,0,0.45) 0%,   transparent 35%),
+            linear-gradient(to left,   rgba(0,0,0,0.3) 0%,    transparent 35%)
+          `,
+        }} />
+      </div>
 
-          {/* Multi-layer vignette */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: `
-              linear-gradient(to top,    rgba(0,0,0,0.85) 0%,   rgba(0,0,0,0.1) 40%),
-              linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,    transparent 25%),
-              linear-gradient(to right,  rgba(0,0,0,0.45) 0%,   transparent 35%),
-              linear-gradient(to left,   rgba(0,0,0,0.3) 0%,    transparent 35%)
-            `,
-          }} />
-        </motion.div>
-      </AnimatePresence>
+      {/* ── Curtain panels ── */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 5,
+        display: 'flex', pointerEvents: 'none',
+      }}>
+        <motion.div
+          animate={{ x: animating ? '0%' : '-100%' }}
+          transition={{ duration: 0.6, ease: [0.76,0,0.24,1] }}
+          style={{
+            width: '50%', height: '100%',
+            background: 'var(--black)',
+            borderRight: '1px solid rgba(201,168,76,0.15)',
+          }}
+        />
+        <motion.div
+          animate={{ x: animating ? '0%' : '100%' }}
+          transition={{ duration: 0.6, ease: [0.76,0,0.24,1] }}
+          style={{
+            width: '50%', height: '100%',
+            background: 'var(--black)',
+            borderLeft: '1px solid rgba(201,168,76,0.15)',
+          }}
+        />
+      </div>
+
+      {/* ── Center gold seam line (decorative) ── */}
+      <div style={{
+        position: 'absolute', top: 0, bottom: 0, left: '50%',
+        width: 1, background: 'rgba(201,168,76,0.1)',
+        zIndex: 6, transform: 'translateX(-50%)',
+      }} />
 
       {/* ── Header ── */}
       <div style={{ position: 'absolute', top: '5.5rem', left: '3rem', zIndex: 20 }}>
         <p className='label'>Memory Archive</p>
       </div>
 
-      {/* ── Slide counter top right ── */}
+      {/* ── Slide counter ── */}
       <div style={{
         position: 'absolute', top: '5.5rem', right: '3rem', zIndex: 20,
         fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
@@ -135,7 +152,6 @@ export default function Gallery() {
         display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
         flexWrap: 'wrap', gap: '2rem',
       }}>
-        {/* Caption block */}
         <div style={{ maxWidth: 560 }}>
           <AnimatePresence mode='wait'>
             <motion.div
@@ -143,7 +159,7 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16,1,0.3,1] }}
             >
               <p className='label' style={{ marginBottom: '0.8rem', opacity: 0.6 }}>
                 {slide.sub}
@@ -158,7 +174,6 @@ export default function Gallery() {
           </AnimatePresence>
         </div>
 
-        {/* CTA */}
         <PremiumButton text='Continue Story' onClick={() => navigate('/timeline')} />
       </div>
 
@@ -169,12 +184,11 @@ export default function Gallery() {
         zIndex: 20, display: 'flex', alignItems: 'center', gap: '0.9rem',
       }}>
         <ArrowBtn dir='left' onClick={prev_slide} />
-
         <div style={{ display: 'flex', gap: 6 }}>
           {SLIDES.map((_, i) => (
             <button
               key={i}
-              onClick={() => goTo(i, i > current ? 1 : -1)}
+              onClick={() => goTo(i)}
               style={{
                 width: i === current ? 22 : 5,
                 height: 5, borderRadius: 3, border: 'none', cursor: 'none',
@@ -185,7 +199,6 @@ export default function Gallery() {
             />
           ))}
         </div>
-
         <ArrowBtn dir='right' onClick={next_slide} />
       </div>
 
@@ -202,18 +215,6 @@ export default function Gallery() {
           style={{ height: '100%', background: 'var(--gold)', transformOrigin: 'left' }}
         />
       </div>
-
-      {/* Ken Burns keyframes injected globally */}
-      <style>{`
-        @keyframes kenBurnsIn {
-          from { transform: scale(1);    }
-          to   { transform: scale(1.04); }
-        }
-        @keyframes kenBurnsOut {
-          from { transform: scale(1.04); }
-          to   { transform: scale(1);    }
-        }
-      `}</style>
     </section>
   )
 }
