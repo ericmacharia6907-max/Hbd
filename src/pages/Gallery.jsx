@@ -32,29 +32,29 @@ const SLIDES = [
 
 const DURATION = 6000
 
+// Diagonal clip-path polygons for the wipe
+const CLIP_HIDDEN = 'polygon(100% 0%, 100% 0%, 100% 100%, 110% 100%)'
+const CLIP_VISIBLE = 'polygon(-10% 0%, 100% 0%, 100% 100%, -10% 100%)'
+
 export default function Gallery() {
   const navigate = useNavigate()
   const [current, setCurrent] = useState(0)
+  const [dir,     setDir]     = useState(1)
   const [paused,  setPaused]  = useState(false)
-  const [animating, setAnimating] = useState(false)
 
-  const goTo = useCallback((idx) => {
-    if (animating) return
-    setAnimating(true)
-    setTimeout(() => {
-      setCurrent(idx)
-      setTimeout(() => setAnimating(false), 50)
-    }, 600) // curtains close before swapping image
-  }, [animating])
+  const goTo = useCallback((idx, direction) => {
+    setDir(direction)
+    setCurrent(idx)
+  }, [])
 
   useEffect(() => {
     if (paused) return
-    const t = setTimeout(() => goTo((current + 1) % SLIDES.length), DURATION)
+    const t = setTimeout(() => goTo((current + 1) % SLIDES.length, 1), DURATION)
     return () => clearTimeout(t)
   }, [current, paused, goTo])
 
-  const prev_slide = () => goTo((current - 1 + SLIDES.length) % SLIDES.length)
-  const next_slide = () => goTo((current + 1) % SLIDES.length)
+  const prev_slide = () => goTo((current - 1 + SLIDES.length) % SLIDES.length, -1)
+  const next_slide = () => goTo((current + 1) % SLIDES.length,  1)
 
   const slide = SLIDES[current]
 
@@ -64,59 +64,62 @@ export default function Gallery() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Base image (always current) ── */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <img
-          src={slide.photo}
-          alt=''
-          style={{
-            width: '100%', height: '100%',
-            objectFit: 'cover',
-            objectPosition: slide.origin,
-          }}
-        />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: `
-            linear-gradient(to top,    rgba(0,0,0,0.85) 0%,   rgba(0,0,0,0.1) 40%),
-            linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,    transparent 25%),
-            linear-gradient(to right,  rgba(0,0,0,0.45) 0%,   transparent 35%),
-            linear-gradient(to left,   rgba(0,0,0,0.3) 0%,    transparent 35%)
-          `,
-        }} />
-      </div>
-
-      {/* ── Curtain panels ── */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 5,
-        display: 'flex', pointerEvents: 'none',
-      }}>
+      {/* ── Diagonal wipe layer ── */}
+      <AnimatePresence>
         <motion.div
-          animate={{ x: animating ? '0%' : '-100%' }}
-          transition={{ duration: 0.6, ease: [0.76,0,0.24,1] }}
-          style={{
-            width: '50%', height: '100%',
-            background: 'var(--black)',
-            borderRight: '1px solid rgba(201,168,76,0.15)',
+          key={current}
+          initial={{
+            clipPath: dir > 0
+              ? 'polygon(100% 0%, 100% 0%, 100% 100%, 110% 100%)'
+              : 'polygon(-10% 0%, -10% 0%, -10% 100%, -10% 100%)',
+            scale: 1.08,
           }}
-        />
-        <motion.div
-          animate={{ x: animating ? '0%' : '100%' }}
-          transition={{ duration: 0.6, ease: [0.76,0,0.24,1] }}
-          style={{
-            width: '50%', height: '100%',
-            background: 'var(--black)',
-            borderLeft: '1px solid rgba(201,168,76,0.15)',
+          animate={{
+            clipPath: 'polygon(-10% 0%, 100% 0%, 100% 100%, -10% 100%)',
+            scale: 1,
           }}
-        />
-      </div>
+          exit={{ opacity: 0 }}
+          transition={{
+            clipPath: { duration: 1.1, ease: [0.76, 0, 0.24, 1] },
+            scale:    { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+          }}
+          style={{ position: 'absolute', inset: 0, zIndex: 0 }}
+        >
+          <img
+            src={slide.photo}
+            alt=''
+            style={{
+              width: '100%', height: '100%',
+              objectFit: 'cover',
+              objectPosition: slide.origin,
+            }}
+          />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: `
+              linear-gradient(to top,    rgba(0,0,0,0.85) 0%,   rgba(0,0,0,0.1) 40%),
+              linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,    transparent 25%),
+              linear-gradient(to right,  rgba(0,0,0,0.45) 0%,   transparent 35%),
+              linear-gradient(to left,   rgba(0,0,0,0.3) 0%,    transparent 35%)
+            `,
+          }} />
+        </motion.div>
+      </AnimatePresence>
 
-      {/* ── Center gold seam line (decorative) ── */}
-      <div style={{
-        position: 'absolute', top: 0, bottom: 0, left: '50%',
-        width: 1, background: 'rgba(201,168,76,0.1)',
-        zIndex: 6, transform: 'translateX(-50%)',
-      }} />
+      {/* Thin gold diagonal seam that sweeps across on transition */}
+      <motion.div
+        key={`seam-${current}`}
+        initial={{ x: dir > 0 ? '100%' : '-100%', opacity: 1 }}
+        animate={{ x: dir > 0 ? '-100%' : '100%', opacity: 0 }}
+        transition={{ duration: 1.1, ease: [0.76,0,0.24,1] }}
+        style={{
+          position: 'absolute', top: 0, bottom: 0, width: '3px',
+          background: 'var(--gold)',
+          zIndex: 8, pointerEvents: 'none',
+          transform: 'skewX(-12deg)',
+          boxShadow: '0 0 24px rgba(201,168,76,0.6)',
+        }}
+      />
 
       {/* ── Header ── */}
       <div style={{ position: 'absolute', top: '5.5rem', left: '3rem', zIndex: 20 }}>
@@ -159,7 +162,7 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.16,1,0.3,1] }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.16,1,0.3,1] }}
             >
               <p className='label' style={{ marginBottom: '0.8rem', opacity: 0.6 }}>
                 {slide.sub}
@@ -188,7 +191,7 @@ export default function Gallery() {
           {SLIDES.map((_, i) => (
             <button
               key={i}
-              onClick={() => goTo(i)}
+              onClick={() => goTo(i, i > current ? 1 : -1)}
               style={{
                 width: i === current ? 22 : 5,
                 height: 5, borderRadius: 3, border: 'none', cursor: 'none',
