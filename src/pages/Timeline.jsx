@@ -21,8 +21,8 @@ const moments = [
   },
   {
     number: '004',
-    title:  'The Future We Keep Talking About',
-    body:   'The business. The bucket list. The daily AI streak I keep reminding you about. We don\'t just talk about the future — we actually plan for it. Turning 20 is just the beginning of everything we\'ve already mapped out.',
+    title:  'Twenty',
+    body:   'And now here we are — you, turning 20. Whatever this year brings, I know you\'ll handle it the way you handle everything: with humor, with zero patience for unnecessary drama, and probably a meme about it within the hour. Excited to watch you take on this decade.',
   },
 ]
 

@@ -147,10 +147,9 @@ export default function Home() {
           }}>
             I made this for you. Hope it makes you smile —
             the way you always make everyone around you smile
-            without even trying. For every meme sent, every
-            happy thing discovered and just had to share,
-            every big dream we've talked about, every business idea,
-            every daily check-in. This is for all of it. All of you.
+            without even trying. You've got a big year ahead,
+            and I just wanted you to start it knowing
+            someone's genuinely proud of you.
           </p>
           <p style={{
             fontFamily: 'var(--font-mono)',
@@ -161,7 +160,7 @@ export default function Home() {
             opacity: 0.6,
             marginTop: '1rem',
           }}>
-            — Your friend who will always remind you of the streak
+            — Your friend
           </p>
         </motion.div>
 

@@ -15,11 +15,11 @@ const words = [
 
 const HIDDEN_MESSAGE = `Okay, real talk — I spent way too many nights on this instead of sleeping. Worth it though.
 
-Also... thank you for actually listening when I randomly bring up business ideas and future plans out of nowhere. Not everyone would sit through that. You always do.
+20 is a big one. I hope this year gives you everything you've been working toward — and the stuff you haven't even said out loud yet. The confidence to go for it, the patience for the parts that take longer than expected, and a lot of moments that make you laugh as hard as you make everyone else laugh.
 
-You're stuck with me forever now. That's not a threat, that's a promise. 🤝
+You deserve a really, really good year, Edignar.
 
-Happy 20th, Edignar.`
+Happy birthday. 🎂`
 
 export default function Ending() {
   const navigate = useNavigate()
@@ -127,11 +127,11 @@ export default function Ending() {
             fontWeight: 300,
           }}
         >
-          For the day I finally stopped watching and just texted.<br />
-          For the no-lies pact we've never broken.<br />
-          For every future we've planned, every streak reminder,<br />
-          every meme, every check-in, every big dream —<br />
-          I'm really glad it was you.
+          Twenty looks good on you already.<br />
+          Here's to everything you're chasing this year —<br />
+          the goals, the wins, the small joys along the way.<br />
+          May it all come easier than you expect.<br />
+          Happy birthday, Edignar.
         </motion.p>
 
         {/* Signature */}

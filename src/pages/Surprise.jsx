@@ -240,11 +240,10 @@ export default function Surprise() {
                 lineHeight: 2, marginBottom: '3.5rem',
               }}
             >
-              Not just today. Not just because it's your birthday.<br />
-              But every daily check-in, every big dream we've mapped out,<br />
-              every story, every plan, every reminder I send you —<br />
+              You make ordinary days funnier just by being in them —<br />
+              and today's not even an ordinary day.<br />
               <span style={{ color: 'rgba(201,168,76,0.8)' }}>
-                I'm really glad we're friends.
+                Happy 20th, Edignar. Go have the best one.
               </span>
             </motion.p>
 
