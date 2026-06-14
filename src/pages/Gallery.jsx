@@ -187,17 +187,18 @@ export default function Gallery() {
         zIndex: 20, display: 'flex', alignItems: 'center', gap: '0.9rem',
       }}>
         <ArrowBtn dir='left' onClick={prev_slide} />
-        <div style={{ display: 'flex', gap: 6 }}>
+        <div style={{ display: 'flex', gap: 4 }}>
           {SLIDES.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i, i > current ? 1 : -1)}
               style={{
-                width: i === current ? 22 : 5,
-                height: 5, borderRadius: 3, border: 'none', cursor: 'none',
+                width: i === current ? 16 : 4,
+                height: 4, borderRadius: 3, border: 'none', cursor: 'none',
                 background: i === current ? 'var(--gold)' : 'rgba(201,168,76,0.25)',
                 transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
                 padding: 0,
+                flexShrink: 0,
               }}
             />
           ))}

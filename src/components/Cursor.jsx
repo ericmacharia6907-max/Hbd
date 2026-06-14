@@ -1,10 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Cursor() {
   const dot  = useRef(null)
   const ring = useRef(null)
+  const [isTouch, setIsTouch] = useState(false)
 
   useEffect(() => {
+    // Detect touch device — hide cursor entirely
+    const touch = window.matchMedia('(pointer: coarse)').matches
+    setIsTouch(touch)
+    if (touch) return
+
     let ringX = 0, ringY = 0
     let dotX  = 0, dotY  = 0
     let raf
@@ -44,6 +50,8 @@ export default function Cursor() {
       cancelAnimationFrame(raf)
     }
   }, [])
+
+  if (isTouch) return null
 
   return (
     <>

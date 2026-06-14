@@ -35,7 +35,10 @@ body {
   color: var(--white);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  cursor: none;
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
 }
 
 /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
